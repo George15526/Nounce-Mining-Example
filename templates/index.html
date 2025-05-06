@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nounce Mining Example Website</title>
+</head>
+<body>
+  <h1>Nounce Mining Example</h1>
+  <form action="/" method="post">
+    <div>
+      <input 
+        type="text"
+        id="hashCode"
+        name="hashCode"
+        placeholder="Input your Hash Code""
+        required
+      />
+      <input type="submit" value="Mine!">
+    </div>
+  </form>
+  <br/>
+  <hr/>
+  {% if results %}
+    <h1>Procedure</h1>
+    <h3>Total case: {{ total }}</h3>
+    {% for result in results %}
+      <p> Case {{ result }}:  {{ results[result] }}</p>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
