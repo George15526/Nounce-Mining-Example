@@ -71,7 +71,9 @@
   {% if results %}
   <div class="success-box">
     <h2>🎉 Success! You've mined a block!</h2>
-    <p><strong>Nounce found:</strong> <span style="color: gray; font-weight: 600;">{{ total }}</span></p>
+    <p><strong>Nounce found:</strong> <span style="color: gray; font-weight: 600;">{{ hash_code }}</span></p>
+    <p><strong>Total counts:</strong> <span style="color: gray; font-weight: 600;">{{ total }}</span></p>
+    <p><strong>Execution time:</strong> <span style="color: gray; font-weight: 600;">{{ execution_time }}s</span></p>
     <details>
       <summary style="color: gray; cursor: pointer;">Detail</summary>
       <div class="attempt-list">
