@@ -4,29 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nounce Mining Example Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f0f8ff;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: 0;
+    }
+    .form-container form div {
+      display: flex;
+      gap: 0.5rem;
+    }
+    input[type="text"] {
+      flex: 1;
+    }
+    .alert-box {
+      background-color: #ffe6e6;
+      color: #a94442;
+      border: 1px solid #ebccd1;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .success-box {
+      background-color: #e0ffe0;
+      border: 2px solid #2e8b57;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .results {
+      background-color: #ffffff;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
   <h1>Nounce Mining Example</h1>
-  <form action="/" method="post">
-    <div>
-      <input 
-        type="text"
-        id="hashCode"
-        name="hashCode"
-        placeholder="Input your Hash Code""
-        required
-      />
-      <input type="submit" value="Mine!">
-    </div>
-  </form>
-  <br/>
+  <div class="form-container">
+    <form action="/" method="post">
+      <div>
+        <input 
+          type="text"
+          id="hashCode"
+          name="hashCode"
+          placeholder="Input your Hash Code""
+          required
+        />
+        <input type="submit" value="Mine!">
+      </div>
+    </form>
+    <br/>
+    {% if alert_msg %}
+      <div class="alert-box">
+        <strong>⚠️ Warning:</strong> {{ alert_msg }}
+      </div>
+    {% endif %}
+  </div>
   <hr/>
   {% if results %}
-    <h1>Procedure</h1>
-    <h3>Total case: {{ total }}</h3>
-    {% for result in results %}
-      <p> Case {{ result }}:  {{ results[result] }}</p>
-    {% endfor %}
+  <div class="success-box">
+    <h2>🎉 Success! You've mined a block!</h2>
+    <p><strong>Nounce found:</strong> <span style="color: gray; font-weight: 600;">{{ total }}</span></p>
+    <details>
+      <summary style="color: gray; cursor: pointer;">Detail</summary>
+      <div class="attempt-list">
+        <h2>Procedure</h2>
+        {% if total <= 20 %}
+          {% for id, result in results.items() %}
+            <p> Case {{ id }}:  {{ result }} </p>
+          {% endfor %}
+        {% else %}
+          {% for id, result in results.items() %}
+            {% if id < 11 %}
+              <p> Case {{ id }}:  {{ result }} </p>
+            {% elif id == 11 %}
+              <p>...</p>
+            {% elif id >= total - 9 %}
+              <p> Case {{ id }}:  {{ result }} </p>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </details>
+  </div>
   {% endif %}
 </body>
 </html>
